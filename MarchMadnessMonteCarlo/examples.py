@@ -24,7 +24,8 @@ def default_energy_game(winner, loser):
     return result
 
 def log5_energy_game(winner, loser):
-    strength = RAS.kenpom['Pyth']
+    #strength = RAS.kenpom['Pyth']
+    strength = RAS.kenpom['AdjEM']
     A,B = strength[winner],strength[loser]
     # see http://207.56.97.150/articles/playoff2002.htm
     win_pct = (A-A*B)/(A+B-2*A*B)

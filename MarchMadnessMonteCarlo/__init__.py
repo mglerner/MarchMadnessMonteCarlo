@@ -26,6 +26,7 @@ from numpy.random import random #import only one function from somewhere
 
 # These are for use externally (i.e. by driver scripts or notebooks)
 from .teams import Teams, Regions, All_teams
+from . import RankingsAndStrength as RAS
 from .Brackets import Bracket, simulate, runbracket1, runbracket2, playgame, maketable
 from .Visualization import showstats
 set_energy_function = config.set_energy_function

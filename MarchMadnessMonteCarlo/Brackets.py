@@ -352,8 +352,8 @@ def bracket_to_string(all_winners):
             team = i
         if include_rank:
             try:
-                region = _teams.regions[i]
-                result = '%s (%s)'%(team,int(_teams.regional_rankings[i]))
+                region = _teams.Regions[i]
+                result = '%s (%s)'%(team,int(_teams.Regional_rankings[i]))
             except KeyError:
                 result = '%s'%(team)
         return result
