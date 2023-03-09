@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import RankingsAndStrength as RAS
-import teams
-regional_rankings = teams.regional_rankings
+from . import RankingsAndStrength as RAS
+from . import teams
+regional_rankings = teams.Regional_rankings
 
 strength = RAS.kenpom['AdjEM']
 

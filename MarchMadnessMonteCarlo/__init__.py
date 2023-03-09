@@ -29,6 +29,6 @@ from .teams import Teams, Regions, All_teams
 from .Brackets import Bracket, simulate, runbracket1, runbracket2, playgame, maketable
 from .Visualization import showstats
 set_energy_function = config.set_energy_function
-import examples
+from . import examples
 #from .examples import default_energy_game
 set_energy_function(examples.default_energy_game)

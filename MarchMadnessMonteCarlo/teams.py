@@ -4,6 +4,10 @@ from . import config
 from numpy.random import random #import only one function from somewhere
 from numpy.random import randint
 
+# These should probably be teams not Teams. But I was having weird import errors.
+# a file in this directory would say `from . import teams as _teams` and then the
+# _teams they would get was the teams dict here. Changing this to upper case fixed the
+# problem.
 Teams = {}
 if config.date == 2013:
     Teams['midwest'] = ['Louisville','North Carolina A&T','Colorado St.','Missouri',
@@ -70,12 +74,12 @@ else:
 
 # These are all listed in the same order:
 _rankings = [1,16,8,9,5,12,4,13,6,11,3,14,7,10,2,15]
-regional_rankings = {}
+Regional_rankings = {}
 for region in Teams:
     for (team,rank) in zip(Teams[region],_rankings):
         # We use a random number here so that the south's number 2
         # seed won't come out exactly the same rank as the west's.
-        regional_rankings[team] = rank + random()/10
+        Regional_rankings[team] = rank + random()/10
 
 Regions = {}
 for region in Teams:

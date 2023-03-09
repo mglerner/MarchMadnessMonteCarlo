@@ -18,7 +18,7 @@ from . import Visualization
 from .config import SimulationResults
 #from MarchMadnessMonteCarlo import Stats
 
-regional_rankings = _teams.regional_rankings
+regional_rankings = _teams.Regional_rankings
 #strength = RAS.kenpom['Luck']
 #strength = RAS.sagarin['Rating']
 #strength = RAS.kenpom['Pyth']
