@@ -11,7 +11,7 @@ Check out the blog post for a nice summary.
 
 __version__ = 0.3
 
-import config
+from . import config
 
 from numpy.random import random #import only one function from somewhere
 #from Brackets import *
@@ -25,7 +25,7 @@ from numpy.random import random #import only one function from somewhere
 
 
 # These are for use externally (i.e. by driver scripts or notebooks)
-from .teams import teams, regions, all_teams
+from .teams import Teams, Regions, All_teams
 from .Brackets import Bracket, simulate, runbracket1, runbracket2, playgame, maketable
 from .Visualization import showstats
 set_energy_function = config.set_energy_function

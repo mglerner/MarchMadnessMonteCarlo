@@ -11,11 +11,11 @@ from time import sleep
 from copy import deepcopy
 from collections import Counter, OrderedDict, defaultdict
 #from decorators import memoized
-import config
-import teams as _teams
-import RankingsAndStrength as RAS
-import Visualization
-from config import SimulationResults
+from . import config
+from . import teams as _teams
+from . import RankingsAndStrength as RAS
+from . import Visualization
+from .config import SimulationResults
 #from MarchMadnessMonteCarlo import Stats
 
 regional_rankings = _teams.regional_rankings

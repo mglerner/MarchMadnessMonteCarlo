@@ -18,7 +18,7 @@
 # Kentucky's Pyth and Navy's Pyth is
 # ratio = kpomdata["Kentucky"]["Pyth"]/kpomdata["Navy"]["Pyth"]
 
-import config
+from . import config
 
 if config.date == 2017:
     text="""

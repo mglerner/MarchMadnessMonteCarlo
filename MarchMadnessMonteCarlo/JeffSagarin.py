@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-from __future__ import division
-import config
+from . import config
 
 if config.date == 2017:
     lineparts = ["Rank","Team","Rating","W","L","Schedule","ScheduleRank","WinsVsTop25","LossesVsTop25","WinsVsTop50","LossesVsTop50",
