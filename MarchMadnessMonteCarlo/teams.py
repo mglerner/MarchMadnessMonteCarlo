@@ -69,6 +69,27 @@ elif config.date == 2017:
                      'Notre Dame','Princeton','W. Virginia','Bucknell',
                      'Maryland','Xavier','Florida St.','FGCU',
                      "St. Mary's", "VCU", "Arizona", 'North Dakota']
+elif config.date == 2023:
+    # The ones to check on:
+    # Pittsburgh
+    # Arizona St.
+    # Texas Southern 
+    Teams['midwest'] = ['Houston','Northern Kentucky','Iowa','Auburn',
+                        'Miami FL','Drake','Indiana','Kent St.',
+                        'Iowa St.','Pittsburgh','Xavier','Kennesaw St.',
+                        'Texas A&M','Penn St.','Texas','Colgate']
+    Teams['south'] = ['Alabama','Texas A&M Corpus Chris','Maryland','West Virginia',
+                      'San Diego St.','Charleston','Virginia','Furman',
+                      'Creighton','N.C. State','Baylor','UC Santa Barbara',
+                      'Missouri','Utah St.','Arizona','Princeton']
+    Teams['east'] = ['Purdue','Texas Southern','Memphis','Florida Atlantic',
+                     'Duke','Oral Roberts','Tennessee','Louisiana',
+                     'Kentucky','Providence','Kansas St.','Montana St.',
+                     'Michigan St.','USC','Marquette','Vermont']
+    Teams['west'] = ['Kansas','Howard','Arkansas','Illinois',
+                     "Saint Mary's",'VCU','Connecticut','Iona',
+                     'TCU','Arizona St.','Gonzaga','Grand Canyon',
+                     "Northwestern", "Boise St.", "UCLA", 'UNC Asheville']
 else:
     raise ImportError('Unknown bracket date: {v}'.format(v=config.date))
 

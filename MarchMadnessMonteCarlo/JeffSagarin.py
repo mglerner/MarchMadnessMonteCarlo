@@ -1,7 +1,488 @@
 #!/usr/bin/env python
 from . import config
 
-if config.date == 2017:
+if config.date == 2023:
+    lineparts = ["Rank","Team","Rating","W","L","Schedule","ScheduleRank","WinsVsTop25","LossesVsTop25","WinsVsTop50","LossesVsTop50",
+                 "PREDICTOR","PREDICTOR_RANK",
+                 "GOLDENMEAN_SCORE","GOLDENMEAN_RANK",
+                 "RECENT","RECENT_RANK","CONFERENCE"]
+    text = """
+      RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+   1  Houston                 =  92.47   29   2   75.55(  93)    1   1  |    5   1  |   93.07    1 |   93.11    1 |   91.86    1  AMER. ATHLETIC
+   2  UCLA                    =  90.96   28   4   78.77(  46)    3   2  |    6   4  |   90.72    4 |   91.14    2 |   90.90    3  PAC-12
+   3  Gonzaga                 =  90.48   27   5   77.48(  70)    6   4  |    6   4  |   89.95    6 |   91.10    3 |   90.37    4  WEST COAST
+   4  Alabama                 =  90.47   26   5   80.98(  13)    5   4  |   11   4  |   91.02    3 |   90.75    5 |   90.01    6  SOUTHEASTERN
+   5  Connecticut             =  90.47   25   7   79.30(  38)    3   4  |   10   5  |   90.27    5 |   89.61    7 |   90.99    2  BIG EAST
+   6  Kansas                  =  90.29   26   6   83.01(   1)   10   5  |   16   6  |   89.61    7 |   91.08    4 |   90.21    5  BIG 12
+   7  Tennessee               =  90.02   23   9   79.34(  36)    5   4  |    9   5  |   91.34    2 |   89.14    9 |   89.86    7  SOUTHEASTERN
+   8  Texas                   =  89.48   24   8   81.52(   9)    8   5  |   13   8  |   89.57    8 |   89.49    8 |   89.33    8  BIG 12
+   9  Arizona                 =  89.05   26   6   78.48(  52)    4   1  |    8   2  |   89.19    9 |   88.64   10 |   89.09   10  PAC-12
+  10  Purdue                  =  88.86   26   5   80.62(  17)    7   3  |   14   5  |   88.81   10 |   90.10    6 |   88.29   11  BIG TEN
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  11  Creighton               =  88.43   21  11   80.51(  19)    3   6  |    7   8  |   88.38   11 |   87.23   14 |   89.10    9  BIG EAST
+  12  Baylor                  =  87.35   22  10   82.28(   5)    8   6  |   12  10  |   88.28   12 |   88.55   11 |   86.41   16  BIG 12
+  13  Duke                    =  86.63   24   8   78.55(  51)    1   2  |    7   6  |   85.95   21 |   86.69   16 |   86.87   13  ATLANTIC COAST
+  14  Kentucky                =  86.57   21  10   79.29(  40)    4   6  |    7   6  |   85.97   20 |   86.45   19 |   86.86   14  SOUTHEASTERN
+  15  Marquette               =  86.50   26   6   79.23(  41)    5   3  |    8   5  |   86.32   17 |   87.50   12 |   86.05   18  BIG EAST
+  16  Saint Mary's-Cal.       =  86.44   25   7   76.76(  77)    1   3  |    2   3  |   87.51   13 |   87.18   15 |   85.59   24  WEST COAST
+  17  Xavier-Ohio             =  86.34   24   8   79.84(  28)    5   5  |    8   6  |   85.97   19 |   87.34   13 |   85.99   19  BIG EAST
+  18  TCU                     =  86.16   21  11   80.55(  18)    6   5  |   11   9  |   86.44   15 |   86.45   18 |   85.79   22  BIG 12
+  19  Indiana                 =  86.11   21  10   81.00(  12)    4   4  |   11  10  |   86.54   14 |   86.51   17 |   85.63   23  BIG TEN
+  20  Maryland                =  86.04   21  11   79.50(  33)    2   4  |    8   9  |   85.59   25 |   85.26   30 |   86.66   15  BIG TEN
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  21  Arkansas                =  86.04   20  12   79.73(  31)    2   7  |    4   9  |   86.42   16 |   85.72   22 |   85.92   20  SOUTHEASTERN
+  22  Texas A&M               =  85.88   23   8   77.68(  67)    3   2  |    5   4  |   85.09   30 |   84.67   32 |   87.03   12  SOUTHEASTERN
+  23  West Virginia           =  85.84   19  14   82.37(   4)    2  11  |    8  13  |   85.60   23 |   85.42   27 |   86.09   17  BIG 12
+  24  Michigan State          =  85.66   19  11   82.12(   6)    3   5  |   11  10  |   84.99   31 |   85.70   23 |   85.90   21  BIG TEN
+  25  Kansas State            =  85.35   23   9   80.44(  21)    6   5  |   10   7  |   85.24   29 |   85.41   28 |   85.27   25  BIG 12
+  26  Iowa State              =  85.32   19  12   82.54(   2)    8   6  |   11  10  |   85.94   22 |   85.48   25 |   84.87   27  BIG 12
+  27  Illinois                =  85.29   20  12   79.81(  29)    3   4  |    7  11  |   85.99   18 |   85.38   29 |   84.85   28  BIG TEN
+  28  Auburn                  =  85.23   20  12   79.99(  26)    2   8  |    4  10  |   85.38   27 |   85.05   31 |   85.15   26  SOUTHEASTERN
+  29  Iowa                    =  84.90   19  13   80.78(  14)    4   4  |   12   8  |   85.44   26 |   84.66   33 |   84.68   30  BIG TEN
+  30  Virginia                =  84.83   24   6   77.96(  61)    2   1  |    8   3  |   84.79   32 |   86.30   20 |   84.14   36  ATLANTIC COAST
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  31  Memphis                 =  84.78   23   8   77.96(  60)    1   3  |    2   3  |   84.38   34 |   85.59   24 |   84.51   33  AMER. ATHLETIC
+  32  Miami-Florida           =  84.57   25   6   77.37(  72)    1   2  |    7   3  |   83.68   44 |   85.46   26 |   84.53   32  ATLANTIC COAST
+  33  San Diego State         =  84.32   24   6   77.31(  73)    0   3  |    3   3  |   85.25   28 |   86.20   21 |   83.12   49  MOUNTAIN WEST
+  34  Michigan                =  84.29   17  15   80.76(  15)    2   6  |    7  12  |   83.74   40 |   84.37   35 |   84.44   34  BIG TEN
+  35  North Carolina          =  84.26   20  13   79.33(  37)    0   4  |    5   9  |   84.46   33 |   84.51   34 |   83.95   39  ATLANTIC COAST
+  36  Southern California     =  84.17   22  10   78.19(  58)    1   4  |    2   5  |   84.08   39 |   84.32   36 |   84.06   37  PAC-12
+  37  Providence              =  84.17   21  11   78.33(  53)    3   7  |    5   8  |   84.10   37 |   84.04   38 |   84.17   35  BIG EAST
+  38  Northwestern            =  84.15   21  10   79.68(  32)    4   1  |    8   9  |   83.73   42 |   83.51   42 |   84.64   31  BIG TEN
+  39  Rutgers                 =  84.15   19  13   79.36(  35)    4   2  |    9   9  |   85.59   24 |   83.63   41 |   83.71   41  BIG TEN
+  40  Utah State              =  83.90   24   7   76.05(  87)    0   0  |    0   2  |   84.11   36 |   84.02   39 |   83.65   42  MOUNTAIN WEST
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  41  Oregon                  =  83.74   19  13   79.22(  42)    1   6  |    3   6  |   83.72   43 |   83.26   44 |   83.90   40  PAC-12
+  42  Clemson                 =  83.60   23   9   76.06(  86)    1   0  |    5   4  |   82.46   52 |   82.55   53 |   84.83   29  ATLANTIC COAST
+  43  Texas Tech              =  83.56   16  16   80.23(  23)    3  11  |    4  15  |   84.22   35 |   83.03   48 |   83.43   44  BIG 12
+  44  Oklahoma State          =  83.48   18  15   81.83(   7)    2  12  |    6  12  |   84.08   38 |   83.87   40 |   82.92   51  BIG 12
+  45  NC State                =  83.29   23  10   77.82(  66)    1   2  |    3   8  |   83.17   46 |   83.08   46 |   83.36   45  ATLANTIC COAST
+  46  Villanova               =  83.27   17  16   80.25(  22)    2   8  |    2  12  |   82.79   49 |   82.33   54 |   83.97   38  BIG EAST
+  47  Florida Atlantic        =  83.18   27   3   72.16( 145)    0   0  |    0   0  |   83.06   47 |   82.81   49 |   83.34   47  CONFERENCE USA
+  48  Penn State              =  83.06   20  12   80.05(  25)    2   4  |    9   8  |   82.55   51 |   83.34   43 |   83.09   50  BIG TEN
+  49  Ohio State              =  82.90   15  18   81.47(  10)    1   7  |    7  15  |   83.74   41 |   82.79   50 |   82.49   52  BIG TEN
+  50  Mississippi State       =  82.82   21  11   77.93(  62)    4   5  |    4   6  |   83.05   48 |   83.24   45 |   82.42   53  SOUTHEASTERN
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  51  Cincinnati              =  82.62   19  11   75.24(  98)    0   4  |    0   7  |   82.78   50 |   81.23   63 |   83.26   48  AMER. ATHLETIC
+  52  Boise State             =  82.36   23   8   76.48(  82)    1   0  |    3   2  |   83.59   45 |   84.10   37 |   81.06   66  MOUNTAIN WEST
+  53  VCU(Va. Commonwealth)   =  82.33   25   7   73.22( 119)    0   0  |    0   1  |   81.09   63 |   81.47   59 |   83.48   43  ATLANTIC 10
+  54  Oklahoma                =  81.98   15  17   82.53(   3)    4  10  |    6  16  |   82.14   55 |   82.69   51 |   81.48   61  BIG 12
+  55  UAB                     =  81.90   23   8   71.84( 155)    0   1  |    1   2  |   81.80   57 |   81.46   60 |   82.08   55  CONFERENCE USA
+  56  Drake                   =  81.88   26   7   72.22( 139)    0   0  |    1   0  |   80.14   76 |   81.06   64 |   83.35   46  MISSOURI VALLEY
+  57  Wisconsin               =  81.65   17  14   81.54(   8)    2   5  |    9  12  |   81.86   56 |   82.61   52 |   81.02   68  BIG TEN
+  58  Missouri                =  81.61   23   8   77.88(  64)    3   5  |    6   7  |   81.68   58 |   83.07   47 |   80.85   72  SOUTHEASTERN
+  59  North Texas             =  81.61   24   6   72.81( 124)    0   1  |    0   3  |   80.94   69 |   81.26   61 |   82.06   56  CONFERENCE USA
+  60  Arizona State           =  81.59   22  11   78.68(  47)    2   3  |    5   6  |   81.64   59 |   82.31   55 |   81.14   65  PAC-12
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  61  Pittsburgh              =  81.58   22  11   77.20(  74)    0   3  |    6   6  |   81.00   66 |   80.88   66 |   82.18   54  ATLANTIC COAST
+  62  Seton Hall              =  81.49   16  15   80.20(  24)    1   8  |    4  12  |   82.14   54 |   81.61   56 |   81.03   67  BIG EAST
+  63  Florida                 =  81.40   16  16   79.78(  30)    1  10  |    2  13  |   82.42   53 |   81.61   57 |   80.74   73  SOUTHEASTERN
+  64  Colorado                =  81.18   17  16   78.60(  48)    2   4  |    3   7  |   81.45   60 |   81.23   62 |   80.93   71  PAC-12
+  65  Dayton                  =  81.08   21  11   73.16( 121)    0   0  |    0   1  |   80.94   68 |   80.56   68 |   81.34   62  ATLANTIC 10
+  66  Washington State        =  81.02   17  16   78.96(  43)    1   4  |    3   8  |   81.07   64 |   80.39   71 |   81.22   64  PAC-12
+  67  Vanderbilt              =  81.01   19  13   79.29(  39)    3   6  |    5   8  |   79.74   79 |   80.32   72 |   82.04   57  SOUTHEASTERN
+  68  BYU                     =  80.88   17  15   75.74(  89)    1   5  |    1   7  |   80.88   70 |   79.99   75 |   81.27   63  WEST COAST
+  69  Toledo                  =  80.76   25   6   70.17( 224)    0   0  |    0   0  |   80.25   75 |   79.76   79 |   81.50   60  MAC
+  70  Virginia Tech           =  80.71   19  14   77.67(  68)    1   1  |    5   8  |   81.13   62 |   80.89   65 |   80.32   76  ATLANTIC COAST
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  71  Central Florida(UCF)    =  80.70   18  13   75.55(  94)    0   2  |    2   4  |   81.43   61 |   79.83   78 |   80.73   74  AMER. ATHLETIC
+  72  College of Charleston   =  80.68   30   3   68.96( 274)    0   0  |    0   1  |   79.09   85 |   79.95   76 |   81.93   58  COLONIAL
+  73  Stanford                =  80.63   14  19   78.56(  50)    1   4  |    2   8  |   80.39   73 |   78.72   87 |   81.81   59  PAC-12
+  74  St. John's              =  80.61   18  15   78.24(  56)    1   8  |    2  12  |   79.87   77 |   80.46   69 |   80.98   70  BIG EAST
+  75  Oral Roberts            =  80.49   26   4   68.83( 277)    0   2  |    0   3  |   80.94   67 |   81.48   58 |   79.74   81  SUMMIT LEAGUE
+  76  Yale                    =  80.19   18   7   71.34( 174)    0   1  |    0   1  |   79.81   78 |   78.94   85 |   81.01   69  IVY LEAGUE
+  77  Kent State              =  80.04   24   6   71.18( 178)    0   2  |    0   2  |   80.44   72 |   80.44   70 |   79.55   83  MAC
+  78  Wake Forest             =  79.78   19  14   77.62(  69)    1   1  |    3   9  |   79.25   83 |   80.01   74 |   79.84   79  ATLANTIC COAST
+  79  Furman                  =  79.47   24   7   70.14( 226)    0   0  |    0   2  |   78.33   89 |   78.77   86 |   80.40   75  SOUTHERN
+  80  Bradley                 =  79.43   24   9   72.57( 133)    0   1  |    0   3  |   79.26   82 |   79.17   82 |   79.55   82  MISSOURI VALLEY
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  81  Iona                    =  79.40   25   7   69.76( 241)    0   0  |    0   0  |   79.33   81 |   78.28   89 |   79.95   78  METRO ATLANTIC
+  82  Utah                    =  79.39   17  15   77.87(  65)    1   4  |    1   9  |   81.00   65 |   79.69   80 |   78.44   87  PAC-12
+  83  Santa Clara             =  79.36   22   9   74.75( 102)    0   4  |    0   5  |   79.23   84 |   80.16   73 |   78.95   86  WEST COAST
+  84  Saint Louis             =  79.22   20  11   74.93( 101)    0   1  |    2   2  |   78.68   86 |   79.40   81 |   79.32   84  ATLANTIC 10
+  85  Nevada                  =  79.20   21  10   76.50(  80)    0   1  |    2   4  |   80.35   74 |   80.69   67 |   77.95   94  MOUNTAIN WEST
+  86  New Mexico              =  79.12   21  11   75.24(  97)    1   0  |    2   3  |   80.72   71 |   79.95   77 |   77.96   93  MOUNTAIN WEST
+  87  Liberty                 =  78.92   23   8   69.05( 271)    0   1  |    0   2  |   79.62   80 |   79.15   83 |   78.38   88  ATLANTIC SUN
+  88  Hofstra                 =  78.89   23   9   70.42( 211)    0   2  |    0   2  |   77.86   92 |   77.29   99 |   80.30   77  COLONIAL
+  89  Nebraska                =  78.35   16  16   81.21(  11)    2   7  |    7  13  |   77.57  100 |   79.07   84 |   78.30   89  BIG TEN
+  90  Indiana State           =  78.25   21  12   70.09( 230)    0   0  |    0   0  |   77.78   93 |   75.95  110 |   79.77   80  MISSOURI VALLEY
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+  91  Sam Houston State       =  78.24   21   6   72.17( 144)    0   0  |    0   1  |   78.50   87 |   78.36   88 |   77.96   92  WESTERN ATHLETIC
+  92  Wichita State           =  78.24   17  14   74.57( 103)    0   3  |    0   6  |   77.60   97 |   77.26  100 |   79.01   85  AMER. ATHLETIC
+  93  Utah Valley             =  78.05   22   7   72.09( 148)    0   0  |    1   1  |   77.75   94 |   78.25   90 |   78.00   90  WESTERN ATHLETIC
+  94  San Francisco           =  77.95   19  14   75.16(  99)    0   5  |    0   6  |   78.25   90 |   78.23   91 |   77.58   97  WEST COAST
+  95  Syracuse                =  77.93   17  15   76.48(  83)    0   1  |    1   7  |   77.64   96 |   77.95   94 |   77.96   91  ATLANTIC COAST
+  96  Marshall                =  77.64   23   8   70.12( 229)    0   0  |    0   0  |   78.48   88 |   78.11   92 |   76.93  104  SUN BELT
+  97  Tulane                  =  77.56   19  10   73.65( 112)    0   2  |    2   2  |   77.46  101 |   78.09   93 |   77.26  101  AMER. ATHLETIC
+  98  Temple                  =  77.55   16  15   76.52(  79)    1   1  |    3   3  |   77.60   99 |   76.83  103 |   77.81   96  AMER. ATHLETIC
+  99  Akron                   =  77.54   20  10   71.22( 176)    0   0  |    0   1  |   77.46  102 |   76.90  102 |   77.83   95  MAC
+ 100  Louisiana               =  77.41   23   7   71.66( 158)    0   1  |    0   1  |   76.62  106 |   77.94   95 |   77.46   99  SUN BELT
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 101  Washington              =  77.22   16  16   78.26(  54)    1   5  |    2   8  |   77.67   95 |   77.52   97 |   76.76  106  PAC-12
+ 102  Mississippi             =  77.08   12  21   78.78(  45)    0   6  |    1  12  |   77.60   98 |   76.94  101 |   76.79  105  SOUTHEASTERN
+ 103  UNLV                    =  76.75   18  13   75.44(  96)    0   0  |    0   4  |   77.93   91 |   77.91   96 |   75.56  118  MOUNTAIN WEST
+ 104  Belmont                 =  76.62   20  11   72.10( 147)    0   0  |    0   0  |   75.66  111 |   75.67  115 |   77.54   98  MISSOURI VALLEY
+ 105  Vermont                 =  76.28   21  10   69.75( 243)    0   1  |    0   2  |   75.46  117 |   75.24  123 |   77.17  102  AMERICA EAST
+ 106  South Alabama           =  76.22   17  16   72.19( 141)    0   1  |    0   2  |   75.48  116 |   74.75  125 |   77.31  100  SUN BELT
+ 107  Colgate                 =  76.14   25   8   67.23( 317)    0   0  |    0   1  |   74.87  123 |   75.64  116 |   76.96  103  PATRIOT
+ 108  UC Irvine               =  76.11   21  10   70.76( 199)    0   0  |    1   1  |   77.17  103 |   76.78  104 |   75.19  122  BIG WEST
+ 109  San Jose State          =  76.09   19  12   75.70(  90)    0   1  |    1   3  |   75.79  110 |   75.94  111 |   76.22  110  MOUNTAIN WEST
+ 110  Butler                  =  76.03   14  18   80.47(  20)    2   8  |    3  13  |   77.14  104 |   77.39   98 |   74.78  125  BIG EAST
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 111  Colorado State          =  76.01   14  18   76.49(  81)    1   0  |    1   6  |   76.56  107 |   76.11  109 |   75.58  117  MOUNTAIN WEST
+ 112  Davidson                =  75.81   15  16   74.30( 104)    0   1  |    0   1  |   75.49  115 |   75.71  114 |   75.93  113  ATLANTIC 10
+ 113  UC Santa Barbara        =  75.79   23   7   69.37( 260)    0   0  |    0   0  |   76.10  108 |   76.72  105 |   75.09  123  BIG WEST
+ 114  Ohio                    =  75.72   18  13   70.62( 206)    0   0  |    0   1  |   75.23  119 |   74.24  136 |   76.67  107  MAC
+ 115  NC Greensboro           =  75.70   18  12   71.16( 181)    0   1  |    0   2  |   74.96  120 |   75.03  124 |   76.32  109  SOUTHERN
+ 116  Loyola Marymount        =  75.57   18  12   74.98( 100)    2   2  |    2   3  |   75.81  109 |   76.21  106 |   75.04  124  WEST COAST
+ 117  James Madison           =  75.47   19  11   70.78( 197)    0   0  |    0   2  |   76.69  105 |   75.73  113 |   74.66  127  SUN BELT
+ 118  Georgia Tech            =  75.42   13  18   77.40(  71)    0   2  |    1   9  |   74.13  132 |   74.44  131 |   76.53  108  ATLANTIC COAST
+ 119  Princeton               =  75.39   17   8   70.34( 215)    0   0  |    0   0  |   74.82  126 |   75.45  121 |   75.56  119  IVY LEAGUE
+ 120  Fordham                 =  75.35   25   7   69.81( 240)    0   1  |    0   1  |   73.93  137 |   75.56  118 |   75.89  114  ATLANTIC 10
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 121  Notre Dame              =  75.19   11  21   76.22(  85)    1   2  |    1   8  |   74.64  127 |   74.12  138 |   75.93  112  ATLANTIC COAST
+ 122  Pennsylvania            =  75.01   16  12   71.94( 153)    0   1  |    0   2  |   74.09  133 |   74.42  132 |   75.70  116  IVY LEAGUE
+ 123  DePaul                  =  74.95   10  23   80.67(  16)    1   9  |    2  14  |   74.62  128 |   74.38  134 |   75.30  121  BIG EAST
+ 124  LSU                     =  74.93   14  19   77.90(  63)    1   8  |    1  11  |   75.49  114 |   76.21  107 |   73.95  137  SOUTHEASTERN
+ 125  Towson                  =  74.91   21  12   69.62( 250)    0   0  |    0   1  |   73.70  140 |   74.13  137 |   75.84  115  COLONIAL
+ 126  George Mason            =  74.84   20  13   72.77( 125)    0   0  |    0   1  |   74.84  124 |   75.33  122 |   74.50  130  ATLANTIC 10
+ 127  Grand Canyon            =  74.79   19  11   71.44( 167)    0   0  |    0   0  |   75.60  112 |   76.11  108 |   73.67  141  WESTERN ATHLETIC
+ 128  Southern Miss           =  74.77   22   7   70.98( 189)    0   0  |    0   0  |   75.51  113 |   75.88  112 |   73.79  139  SUN BELT
+ 129  Charlotte               =  74.76   18  14   71.84( 156)    0   0  |    0   2  |   75.28  118 |   74.51  130 |   74.52  129  CONFERENCE USA
+ 130  Montana State           =  74.75   23   9   70.06( 232)    0   1  |    0   2  |   74.89  122 |   75.58  117 |   74.18  133  BIG SKY
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 131  Southern Illinois       =  74.74   22  10   71.65( 159)    0   0  |    1   0  |   74.40  129 |   75.50  119 |   74.44  132  MISSOURI VALLEY
+ 132  UMass Lowell            =  74.73   24   7   65.16( 352)    0   0  |    0   1  |   73.46  147 |   73.30  148 |   76.05  111  AMERICA EAST
+ 133  Boston College          =  74.66   16  17   76.80(  76)    0   2  |    2   8  |   72.90  153 |   74.59  129 |   75.52  120  ATLANTIC COAST
+ 134  Duquesne                =  74.45   20  12   72.05( 149)    0   1  |    0   1  |   74.33  131 |   74.36  135 |   74.45  131  ATLANTIC 10
+ 135  Middle Tennessee        =  74.41   17  13   73.96( 106)    0   0  |    1   1  |   74.91  121 |   74.65  127 |   73.95  136  CONFERENCE USA
+ 136  Missouri State          =  74.34   16  15   72.70( 130)    0   1  |    0   1  |   74.05  134 |   74.02  139 |   74.55  128  MISSOURI VALLEY
+ 137  Samford                 =  74.28   18  10   70.24( 220)    0   0  |    0   0  |   73.70  141 |   73.87  142 |   74.68  126  SOUTHERN
+ 138  Southern Utah           =  74.12   17  11   72.66( 131)    0   1  |    0   1  |   74.83  125 |   74.71  126 |   73.39  143  WESTERN ATHLETIC
+ 139  Fresno State            =  73.76   10  20   75.94(  88)    0   0  |    0   3  |   73.97  135 |   73.12  153 |   73.88  138  MOUNTAIN WEST
+ 140  Youngstown State        =  73.66   22   9   67.70( 308)    0   0  |    0   0  |   74.40  130 |   73.45  145 |   73.31  145  HORIZON
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 141  CS Fullerton            =  73.51   17  12   71.54( 162)    0   0  |    0   2  |   73.14  150 |   73.16  151 |   73.78  140  BIG WEST
+ 142  Richmond                =  73.50   15  18   73.56( 115)    0   0  |    0   1  |   73.76  139 |   74.41  133 |   72.82  153  ATLANTIC 10
+ 143  Hawai'i                 =  73.49   21  11   69.41( 257)    0   0  |    0   0  |   73.79  138 |   74.62  128 |   72.69  155  BIG WEST
+ 144  UC Riverside            =  73.47   21  11   71.36( 172)    0   1  |    0   2  |   73.60  144 |   73.93  141 |   73.07  149  BIG WEST
+ 145  Eastern Washington      =  73.43   21  10   70.01( 235)    0   0  |    0   1  |   73.48  146 |   73.97  140 |   73.04  150  BIG SKY
+ 146  Florida State           =  73.22    9  23   78.25(  55)    0   2  |    1   9  |   72.82  156 |   73.20  150 |   73.33  144  ATLANTIC COAST
+ 147  Minnesota               =  73.20    9  22   79.89(  27)    0   6  |    2  15  |   72.15  163 |   72.54  163 |   73.97  135  BIG TEN
+ 148  Troy                    =  73.08   17  13   71.49( 165)    0   1  |    0   2  |   73.64  143 |   73.21  149 |   72.63  156  SUN BELT
+ 149  Kennesaw State          =  73.08   23   8   69.70( 245)    0   1  |    0   2  |   72.37  162 |   72.82  158 |   73.46  142  ATLANTIC SUN
+ 150  South Florida           =  73.06   14  18   73.79( 108)    0   1  |    0   4  |   73.21  148 |   73.05  155 |   72.90  151  AMER. ATHLETIC
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 151  Stephen F. Austin       =  73.06   16  13   71.08( 182)    0   0  |    0   0  |   73.97  136 |   73.72  144 |   72.18  160  WESTERN ATHLETIC
+ 152  Saint Joseph's-Pa.      =  72.90   16  17   72.19( 142)    0   1  |    0   2  |   71.95  166 |   71.42  179 |   74.04  134  ATLANTIC 10
+ 153  NC Asheville            =  72.84   25   7   67.90( 303)    0   1  |    0   1  |   71.26  182 |   73.38  147 |   73.26  147  BIG SOUTH
+ 154  Georgia                 =  72.82   16  16   76.76(  78)    1   5  |    3   6  |   73.66  142 |   75.49  120 |   71.02  182  SOUTHEASTERN
+ 155  NC Wilmington           =  72.82   22  10   70.48( 209)    0   1  |    0   2  |   71.89  168 |   73.72  143 |   72.75  154  COLONIAL
+ 156  Ball State              =  72.68   18  12   70.40( 214)    0   0  |    0   0  |   73.20  149 |   73.09  154 |   72.13  162  MAC
+ 157  SMU                     =  72.67   10  22   77.18(  75)    0   4  |    1   6  |   72.58  159 |   72.68  160 |   72.62  157  AMER. ATHLETIC
+ 158  Northern Kentucky       =  72.62   20  12   69.21( 266)    0   0  |    0   1  |   71.37  177 |   72.64  161 |   73.14  148  HORIZON
+ 159  Cornell                 =  72.56   15  10   71.03( 185)    0   0  |    0   1  |   72.90  154 |   72.91  157 |   72.11  163  IVY LEAGUE
+ 160  Old Dominion            =  72.45   18  12   71.49( 166)    0   0  |    0   0  |   72.49  161 |   72.72  159 |   72.21  159  SUN BELT
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 161  South Carolina          =  72.41   11  21   78.10(  59)    1   5  |    2   8  |   71.02  186 |   71.89  171 |   73.26  146  SOUTHEASTERN
+ 162  Portland                =  72.26   12  19   75.57(  92)    0   5  |    1   7  |   72.79  157 |   72.46  164 |   71.80  165  WEST COAST
+ 163  South Dakota State      =  72.20   18  13   70.29( 217)    0   2  |    0   2  |   72.79  158 |   72.98  156 |   71.41  172  SUMMIT LEAGUE
+ 164  Chattanooga             =  72.18   15  17   71.06( 184)    0   0  |    0   0  |   71.40  175 |   71.37  181 |   72.88  152  SOUTHERN
+ 165  East Carolina           =  72.14   16  16   73.41( 116)    0   1  |    0   2  |   71.28  181 |   72.03  168 |   72.54  158  AMER. ATHLETIC
+ 166  Seattle                 =  72.09   18  12   72.18( 143)    0   0  |    0   1  |   73.09  151 |   73.41  146 |   70.83  185  WESTERN ATHLETIC
+ 167  Wyoming                 =  72.09    8  22   76.46(  84)    0   1  |    0   5  |   73.03  152 |   72.59  162 |   71.27  177  MOUNTAIN WEST
+ 168  Western Kentucky        =  72.07   15  16   73.23( 118)    0   0  |    0   3  |   72.87  155 |   73.13  152 |   71.04  181  CONFERENCE USA
+ 169  Harvard                 =  72.01   12  14   71.17( 179)    0   1  |    0   1  |   71.92  167 |   71.59  176 |   72.17  161  IVY LEAGUE
+ 170  St. Bonaventure         =  71.94   14  18   72.41( 138)    0   0  |    0   0  |   72.05  164 |   72.38  165 |   71.56  167  ATLANTIC 10
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 171  Louisiana Tech          =  71.93   12  18   73.76( 109)    0   0  |    0   3  |   73.48  145 |   72.31  166 |   70.87  184  CONFERENCE USA
+ 172  Oregon State            =  71.65   10  21   78.22(  57)    0   5  |    1   8  |   71.89  169 |   71.71  174 |   71.41  173  PAC-12
+ 173  New Mexico State        =  71.61    6  15   74.07( 105)    0   1  |    0   1  |   72.49  160 |   71.94  170 |   70.90  183  WESTERN ATHLETIC
+ 174  Northern Iowa           =  71.47   13  18   72.56( 134)    0   0  |    0   0  |   71.57  173 |   71.29  182 |   71.42  171  MISSOURI VALLEY
+ 175  Georgetown              =  71.38    7  25   79.49(  34)    0   8  |    0  15  |   71.35  179 |   70.89  188 |   71.54  169  BIG EAST
+ 176  Lipscomb                =  71.36   17  13   69.36( 262)    0   0  |    0   1  |   71.14  185 |   71.16  183 |   71.48  170  ATLANTIC SUN
+ 177  Brown                   =  71.36   14  13   70.98( 188)    0   1  |    0   2  |   70.44  197 |   70.60  193 |   72.09  164  IVY LEAGUE
+ 178  Air Force               =  71.34   14  18   72.74( 126)    0   0  |    0   4  |   71.72  171 |   70.69  191 |   71.37  174  MOUNTAIN WEST
+ 179  Wright State            =  71.32   16  15   68.49( 287)    0   0  |    0   0  |   71.36  178 |   70.59  194 |   71.56  166  HORIZON
+ 180  California Baptist      =  71.22   15  16   70.78( 198)    0   0  |    0   0  |   71.85  170 |   71.55  177 |   70.63  187  WESTERN ATHLETIC
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 181  Long Beach State        =  71.19   15  16   71.58( 160)    0   1  |    0   2  |   71.96  165 |   71.94  169 |   70.33  196  BIG WEST
+ 182  Navy                    =  71.03   17  13   67.38( 315)    0   1  |    0   1  |   70.67  190 |   70.15  202 |   71.55  168  PATRIOT
+ 183  UC Davis                =  71.02   16  14   70.25( 219)    0   1  |    0   1  |   71.68  172 |   71.86  172 |   70.17  200  BIG WEST
+ 184  Massachusetts           =  70.97   15  16   73.11( 122)    0   0  |    0   0  |   71.29  180 |   72.23  167 |   70.07  203  ATLANTIC 10
+ 185  UTEP                    =  70.92   12  18   73.19( 120)    0   1  |    0   3  |   71.49  174 |   70.90  187 |   70.56  190  CONFERENCE USA
+ 186  Montana                 =  70.89   16  14   70.14( 225)    0   2  |    0   2  |   71.40  176 |   71.45  178 |   70.26  198  BIG SKY
+ 187  Drexel                  =  70.83   16  15   68.48( 288)    0   0  |    0   0  |   70.68  189 |   70.14  204 |   71.15  179  COLONIAL
+ 188  George Washington       =  70.83   15  16   72.01( 151)    0   0  |    0   0  |   70.37  198 |   70.35  197 |   71.19  178  ATLANTIC 10
+ 189  Cleveland State         =  70.76   20  12   68.72( 281)    0   0  |    0   0  |   70.59  194 |   71.42  180 |   70.42  193  HORIZON
+ 190  Longwood                =  70.73   18  12   66.81( 324)    0   1  |    0   1  |   71.00  187 |   70.56  195 |   70.57  189  BIG SOUTH
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 191  Weber State             =  70.72   16  15   70.82( 196)    0   0  |    1   0  |   70.78  188 |   70.51  196 |   70.70  186  BIG SKY
+ 192  Buffalo                 =  70.65   13  17   73.85( 107)    0   3  |    0   3  |   71.22  184 |   71.68  175 |   69.73  208  MAC
+ 193  Eastern Kentucky        =  70.59   17  13   70.03( 233)    0   1  |    0   1  |   69.85  206 |   70.05  206 |   71.13  180  ATLANTIC SUN
+ 194  Murray State            =  70.58   16  15   72.70( 129)    1   0  |    1   0  |   69.87  203 |   71.76  173 |   70.23  199  MISSOURI VALLEY
+ 195  Appalachian State       =  70.57   13  16   71.50( 164)    0   0  |    0   0  |   70.62  192 |   70.78  189 |   70.35  195  SUN BELT
+ 196  La Salle                =  70.50   15  19   72.50( 137)    0   0  |    0   1  |   69.46  214 |   69.61  213 |   71.35  175  ATLANTIC 10
+ 197  Texas State             =  70.46   14  18   71.94( 154)    0   0  |    0   0  |   70.51  196 |   70.92  186 |   70.11  202  SUN BELT
+ 198  Texas A&M-CorpusChristi =  70.25   19  10   64.08( 358)    0   1  |    0   3  |   69.93  201 |   69.68  211 |   70.59  188  SOUTHLAND
+ 199  Georgia Southern        =  70.17   14  16   70.65( 204)    0   0  |    0   0  |   69.85  207 |   69.53  214 |   70.54  191  SUN BELT
+ 200  Mercer                  =  70.11   12  19   70.42( 212)    0   0  |    0   0  |   69.09  224 |   68.52  229 |   71.28  176  SOUTHERN
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 201  Wofford                 =  70.06   14  16   70.97( 190)    1   0  |    1   0  |   69.59  212 |   69.63  212 |   70.41  194  SOUTHERN
+ 202  Tarleton State          =  70.03   13  16   73.71( 111)    0   1  |    0   1  |   70.63  191 |   70.97  185 |   69.14  219  WESTERN ATHLETIC
+ 203  Pepperdine              =  69.99    7  22   75.44(  95)    0   4  |    0   4  |   71.23  183 |   70.32  199 |   69.08  220  WEST COAST
+ 204  Radford                 =  69.98   17  14   68.86( 276)    0   2  |    0   2  |   70.61  193 |   69.92  207 |   69.60  212  BIG SOUTH
+ 205  Pacific                 =  69.95   14  17   73.34( 117)    0   2  |    0   2  |   69.85  205 |   70.23  200 |   69.75  206  WEST COAST
+ 206  Utah Tech               =  69.91   11  19   72.71( 128)    0   1  |    0   2  |   70.56  195 |   69.04  221 |   69.92  205  WESTERN ATHLETIC
+ 207  Norfolk State           =  69.88   17  10   65.44( 346)    0   3  |    0   3  |   69.61  211 |   69.76  210 |   69.98  204  MEAC
+ 208  Rider                   =  69.81   15  14   68.08( 297)    0   0  |    0   2  |   69.52  213 |   69.26  219 |   70.13  201  METRO ATLANTIC
+ 209  Loyola-Chicago          =  69.78   10  21   73.58( 114)    0   1  |    1   1  |   69.70  210 |   70.11  205 |   69.55  213  ATLANTIC 10
+ 210  Grambling State         =  69.75   21   8   64.81( 355)    0   0  |    0   0  |   69.12  222 |   70.18  201 |   69.74  207  SOUTHWESTERN
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 211  NC Central              =  69.74   14  11   66.64( 329)    0   1  |    0   2  |   69.09  225 |   68.76  225 |   70.45  192  MEAC
+ 212  Detroit Mercy           =  69.73   13  19   70.14( 227)    0   0  |    0   1  |   69.87  204 |   69.50  215 |   69.68  210  HORIZON
+ 213  North Dakota State      =  69.67   14  17   70.42( 213)    0   2  |    0   2  |   69.27  218 |   69.77  209 |   69.72  209  SUMMIT LEAGUE
+ 214  Abilene Christian       =  69.37    9  17   72.53( 135)    0   2  |    0   2  |   70.32  199 |   70.34  198 |   68.28  225  WESTERN ATHLETIC
+ 215  Bryant                  =  69.34   15  13   69.44( 256)    0   0  |    0   1  |   70.01  200 |   69.85  208 |   68.65  221  AMERICA EAST
+ 216  Quinnipiac              =  69.31   19  12   68.27( 294)    0   0  |    0   1  |   69.88  202 |   70.69  192 |   68.20  226  METRO ATLANTIC
+ 217  Fla. International      =  69.31   12  18   72.04( 150)    0   0  |    0   3  |   69.32  217 |   68.72  227 |   69.49  214  CONFERENCE USA
+ 218  St. Thomas-Mn.          =  69.18   17  14   68.56( 285)    0   1  |    0   1  |   69.15  221 |   68.02  235 |   69.65  211  SUMMIT LEAGUE
+ 219  Western Carolina        =  69.16   15  15   70.13( 228)    0   1  |    0   1  |   67.53  239 |   68.26  231 |   70.26  197  SOUTHERN
+ 220  Louisville              =  68.91    4  28   78.56(  49)    0   4  |    1  12  |   68.07  232 |   68.86  223 |   69.25  217  ATLANTIC COAST
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 221  Rice                    =  68.85   15  15   72.73( 127)    0   1  |    0   3  |   69.77  209 |   71.03  184 |   67.08  248  CONFERENCE USA
+ 222  Siena                   =  68.82   17  15   68.80( 278)    0   0  |    0   0  |   69.37  215 |   70.14  203 |   67.73  236  METRO ATLANTIC
+ 223  Florida Gulf Coast      =  68.71   16  15   69.15( 269)    0   1  |    1   2  |   69.81  208 |   70.77  190 |   66.90  252  ATLANTIC SUN
+ 224  Stetson                 =  68.64   15  13   70.66( 203)    0   0  |    0   0  |   69.09  223 |   69.40  217 |   67.92  230  ATLANTIC SUN
+ 225  Gardner-Webb            =  68.64   13  16   69.20( 267)    0   0  |    0   1  |   69.36  216 |   68.77  224 |   68.10  228  BIG SOUTH
+ 226  Campbell                =  68.61   14  18   68.35( 292)    0   0  |    0   1  |   67.91  235 |   67.34  246 |   69.46  216  BIG SOUTH
+ 227  San Diego               =  68.58    9  20   73.73( 110)    0   3  |    0   4  |   69.22  220 |   69.13  220 |   67.87  234  WEST COAST
+ 228  Jacksonville State      =  68.50   10  18   69.85( 239)    0   1  |    0   1  |   67.69  238 |   67.69  239 |   69.18  218  ATLANTIC SUN
+ 229  Rhode Island            =  68.48    9  22   72.90( 123)    0   1  |    0   2  |   69.26  219 |   68.45  230 |   67.99  229  ATLANTIC 10
+ 230  Northern Arizona        =  68.48   10  23   71.37( 171)    0   2  |    0   2  |   67.87  236 |   66.71  250 |   69.48  215  BIG SKY
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 231  Delaware                =  68.33   16  16   70.28( 218)    0   1  |    0   1  |   68.15  231 |   69.46  216 |   67.73  237  COLONIAL
+ 232  East Tennessee State(ETS=  68.24   10  20   69.70( 244)    0   0  |    0   0  |   68.06  233 |   67.55  241 |   68.57  223  SOUTHERN
+ 233  Milwaukee               =  68.18   18  11   68.74( 279)    0   1  |    0   2  |   68.37  228 |   69.29  218 |   67.41  243  HORIZON
+ 234  Northern Colorado       =  68.14   12  19   70.73( 200)    0   2  |    0   2  |   67.95  234 |   68.65  228 |   67.88  233  BIG SKY
+ 235  Morehead State          =  68.06   17  11   66.26( 337)    0   2  |    0   2  |   67.22  244 |   69.02  222 |   67.88  232  OHIO VALLEY
+ 236  Winthrop                =  67.87   13  17   69.51( 253)    0   0  |    0   2  |   67.48  240 |   68.03  234 |   67.89  231  BIG SOUTH
+ 237  Fort Wayne(PFW)         =  67.76   15  15   68.64( 283)    0   0  |    0   2  |   68.41  227 |   68.75  226 |   66.79  255  HORIZON
+ 238  Northwestern State      =  67.75   21  11   65.52( 344)    1   2  |    1   3  |   68.18  229 |   68.16  233 |   67.23  246  SOUTHLAND
+ 239  Howard                  =  67.75   17  12   67.12( 319)    0   1  |    0   1  |   66.33  261 |   67.07  248 |   68.63  222  MEAC
+ 240  California              =  67.70    3  29   78.92(  44)    0   5  |    0  10  |   68.68  226 |   67.91  236 |   66.98  250  PAC-12
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 241  Northern Illinois       =  67.65   12  18   71.76( 157)    0   1  |    0   2  |   67.35  242 |   67.38  244 |   67.84  235  MAC
+ 242  UMBC                    =  67.59   17  14   66.61( 330)    0   1  |    0   1  |   67.75  237 |   67.83  237 |   67.30  245  AMERICA EAST
+ 243  Miami-Ohio              =  67.59    9  20   71.00( 186)    0   1  |    0   1  |   66.87  247 |   66.14  263 |   68.49  224  MAC
+ 244  Robert Morris           =  67.41   14  17   68.48( 289)    0   0  |    0   1  |   66.89  245 |   67.36  245 |   67.58  241  HORIZON
+ 245  Sacramento State        =  67.25   12  18   70.64( 205)    0   1  |    0   1  |   68.17  230 |   67.55  240 |   66.51  258  BIG SKY
+ 246  Boston U.               =  67.14   14  17   67.74( 307)    0   1  |    0   1  |   66.56  256 |   66.52  256 |   67.62  239  PATRIOT
+ 247  North Florida(UNF)      =  67.13   12  17   69.70( 246)    0   3  |    0   3  |   66.62  253 |   67.50  242 |   67.09  247  ATLANTIC SUN
+ 248  Canisius                =  67.12    9  20   69.67( 247)    0   0  |    0   1  |   66.28  262 |   65.55  277 |   68.12  227  METRO ATLANTIC
+ 249  Army West Point         =  67.00   15  16   66.66( 327)    0   0  |    0   0  |   66.21  263 |   66.59  254 |   67.48  242  PATRIOT
+ 250  USC Upstate             =  66.90   14  15   69.51( 252)    0   1  |    0   2  |   65.70  271 |   66.44  259 |   67.59  240  BIG SOUTH
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 251  Queens-NC               =  66.88   15  15   69.29( 264)    0   0  |    0   0  |   66.57  254 |   66.05  264 |   67.33  244  ATLANTIC SUN
+ 252  UT Arlington            =  66.87    8  21   73.61( 113)    0   0  |    0   1  |   67.45  241 |   67.45  243 |   66.17  266  WESTERN ATHLETIC
+ 253  Valparaiso              =  66.86   10  21   71.53( 163)    0   0  |    0   0  |   66.50  258 |   66.70  251 |   67.02  249  MISSOURI VALLEY
+ 254  Illinois State          =  66.79   11  21   70.18( 223)    0   0  |    0   0  |   66.67  250 |   66.58  255 |   66.86  253  MISSOURI VALLEY
+ 255  Niagara                 =  66.76   15  14   68.09( 296)    0   1  |    0   1  |   66.74  249 |   67.26  247 |   66.42  259  METRO ATLANTIC
+ 256  SE Missouri State(SEMO) =  66.73   17  16   66.21( 338)    0   0  |    0   1  |   66.54  257 |   66.24  260 |   66.96  251  OHIO VALLEY
+ 257  Dartmouth               =  66.67    8  18   71.27( 175)    0   0  |    0   0  |   65.71  268 |   65.33  281 |   67.64  238  IVY LEAGUE
+ 258  Western Illinois        =  66.51   13  14   67.93( 300)    0   0  |    0   0  |   66.67  251 |   66.64  253 |   66.27  263  SUMMIT LEAGUE
+ 259  Jacksonville            =  66.51   10  16   70.44( 210)    0   1  |    0   1  |   67.32  243 |   68.17  232 |   65.02  280  ATLANTIC SUN
+ 260  Fairfield               =  66.40   12  18   68.95( 275)    0   1  |    0   1  |   66.35  259 |   66.23  261 |   66.41  260  METRO ATLANTIC
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 261  Bellarmine              =  66.35   12  18   71.39( 170)    0   3  |    0   4  |   66.57  255 |   66.78  249 |   65.91  271  ATLANTIC SUN
+ 262  Oakland-Mich.           =  66.29   12  19   70.70( 201)    0   1  |    0   2  |   65.79  266 |   66.45  257 |   66.36  262  HORIZON
+ 263  Arkansas State          =  66.17   10  20   69.47( 254)    0   0  |    0   0  |   65.61  274 |   65.30  282 |   66.75  256  SUN BELT
+ 264  Lehigh                  =  66.15   14  14   67.60( 311)    0   0  |    0   0  |   65.41  277 |   66.14  262 |   66.41  261  PATRIOT
+ 265  Alcorn State            =  66.10   18  13   67.54( 312)    0   1  |    0   1  |   65.51  276 |   67.72  238 |   65.42  277  SOUTHWESTERN
+ 266  Portland State          =  65.87   10  19   71.19( 177)    0   2  |    0   2  |   66.79  248 |   66.69  252 |   64.82  285  BIG SKY
+ 267  Marist                  =  65.80   12  19   67.24( 316)    0   0  |    0   0  |   64.67  292 |   64.97  288 |   66.61  257  METRO ATLANTIC
+ 268  Illinois-Chicago        =  65.77   11  20   70.97( 191)    0   0  |    0   1  |   65.62  273 |   65.84  271 |   65.71  275  MISSOURI VALLEY
+ 269  New Hampshire           =  65.77   13  15   68.31( 293)    0   0  |    0   0  |   64.70  289 |   65.91  268 |   66.10  267  AMERICA EAST
+ 270  Lafayette               =  65.72   11  23   69.75( 242)    0   0  |    0   2  |   65.57  275 |   64.58  294 |   66.21  265  PATRIOT
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 271  Md.-Eastern Shore(UMES) =  65.69   14  12   67.67( 309)    0   1  |    0   2  |   64.58  294 |   65.37  280 |   66.26  264  MEAC
+ 272  Mount St. Mary's        =  65.60   12  20   69.00( 273)    0   1  |    0   2  |   65.15  281 |   64.98  287 |   66.01  270  METRO ATLANTIC
+ 273  SIU-Edwardsville        =  65.56   16  14   65.82( 342)    0   0  |    0   0  |   66.66  252 |   66.04  265 |   64.60  291  OHIO VALLEY
+ 274  Saint Peter's           =  65.54   13  17   67.97( 299)    0   1  |    0   1  |   64.32  297 |   65.46  279 |   66.04  269  METRO ATLANTIC
+ 275  Bowling Green           =  65.53    9  20   70.02( 234)    0   0  |    0   0  |   66.09  264 |   66.00  267 |   64.89  284  MAC
+ 276  Merrimack               =  65.52   16  16   64.54( 356)    0   0  |    0   1  |   63.27  312 |   64.54  296 |   66.81  254  NORTHEAST
+ 277  UC San Diego            =  65.47    8  20   71.40( 168)    0   0  |    0   1  |   65.25  280 |   64.66  293 |   65.86  272  BIG WEST
+ 278  Georgia State           =  65.45    7  21   71.07( 183)    0   0  |    0   1  |   66.89  246 |   66.44  258 |   63.98  301  SUN BELT
+ 279  North Alabama           =  65.43   15  14   69.39( 258)    0   0  |    0   1  |   64.72  288 |   65.91  269 |   65.43  276  ATLANTIC SUN
+ 280  UTSA                    =  65.34    8  22   72.59( 132)    0   0  |    0   2  |   64.62  293 |   64.95  289 |   65.78  273  CONFERENCE USA
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 281  UTRGV                   =  65.33   11  17   70.96( 192)    0   2  |    0   2  |   65.40  278 |   65.89  270 |   64.91  283  WESTERN ATHLETIC
+ 282  Manhattan               =  65.32   11  18   68.04( 298)    0   0  |    0   1  |   64.70  290 |   64.14  301 |   66.06  268  METRO ATLANTIC
+ 283  North Dakota            =  65.31   11  20   69.05( 270)    0   1  |    0   2  |   64.95  284 |   64.57  295 |   65.74  274  SUMMIT LEAGUE
+ 284  American U.             =  65.29   17  15   66.82( 323)    0   0  |    0   0  |   65.76  267 |   65.80  272 |   64.67  289  PATRIOT
+ 285  Idaho State             =  65.24    9  21   69.36( 261)    0   0  |    0   0  |   65.69  272 |   65.07  285 |   65.00  281  BIG SKY
+ 286  South Dakota            =  65.24   10  19   69.55( 251)    0   0  |    0   1  |   64.35  296 |   65.69  273 |   65.33  278  SUMMIT LEAGUE
+ 287  Coastal Carolina        =  64.96    8  20   71.17( 180)    0   0  |    0   0  |   65.97  265 |   65.59  275 |   63.97  302  SUN BELT
+ 288  Northeastern            =  64.92   10  20   70.22( 221)    0   0  |    0   1  |   64.51  295 |   65.58  276 |   64.69  288  COLONIAL
+ 289  CS Bakersfield          =  64.91    9  22   70.95( 194)    0   0  |    0   0  |   65.70  269 |   65.47  278 |   64.07  299  BIG WEST
+ 290  Tennessee State         =  64.89   14  14   64.05( 359)    0   0  |    0   0  |   64.91  285 |   64.86  291 |   64.81  286  OHIO VALLEY
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 291  Cal Poly-SLO            =  64.82    6  25   71.35( 173)    0   0  |    0   0  |   65.36  279 |   63.81  306 |   64.93  282  BIG WEST
+ 292  SE Louisiana            =  64.76   15  14   66.13( 339)    0   1  |    0   1  |   64.87  286 |   65.29  283 |   64.32  297  SOUTHLAND
+ 293  Tulsa                   =  64.63    5  25   75.64(  91)    0   2  |    0   4  |   65.70  270 |   66.01  266 |   63.11  313  AMER. ATHLETIC
+ 294  Southern U.             =  64.58   13  17   66.36( 334)    0   3  |    0   3  |   66.34  260 |   64.91  290 |   63.27  311  SOUTHWESTERN
+ 295  ULM                     =  64.56    8  21   72.20( 140)    0   2  |    0   2  |   64.31  298 |   65.05  286 |   64.34  295  SUN BELT
+ 296  Binghamton-NY           =  64.50   11  18   68.62( 284)    0   1  |    0   1  |   63.81  307 |   63.67  307 |   65.10  279  AMERICA EAST
+ 297  Prairie View A&M        =  64.31   11  19   66.97( 322)    0   1  |    0   3  |   65.03  282 |   64.78  292 |   63.57  306  SOUTHWESTERN
+ 298  High Point              =  64.30   12  17   67.89( 305)    0   0  |    0   0  |   64.15  301 |   64.52  299 |   64.16  298  BIG SOUTH
+ 299  Nicholls State          =  64.29   12  15   66.74( 326)    0   2  |    0   4  |   64.97  283 |   65.69  274 |   63.01  315  SOUTHLAND
+ 300  Eastern Michigan        =  64.26    7  23   71.95( 152)    0   0  |    0   2  |   63.90  305 |   64.02  303 |   64.46  292  MAC
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 301  Texas Southern          =  64.16   10  20   67.90( 302)    0   2  |    0   4  |   64.68  291 |   64.43  300 |   63.66  303  SOUTHWESTERN
+ 302  Tennessee-Martin        =  64.16   15  14   65.37( 348)    0   0  |    0   0  |   64.10  302 |   65.11  284 |   63.57  307  OHIO VALLEY
+ 303  Western Michigan        =  64.14    5  23   71.57( 161)    0   0  |    0   1  |   64.82  287 |   63.40  313 |   64.05  300  MAC
+ 304  William & Mary          =  64.12   11  20   69.63( 249)    0   0  |    0   1  |   63.36  311 |   63.97  304 |   64.45  294  COLONIAL
+ 305  Tennessee Tech          =  64.07   13  17   66.43( 332)    0   1  |    0   1  |   63.61  309 |   63.48  310 |   64.46  293  OHIO VALLEY
+ 306  Stony Brook-NY          =  64.05    9  22   69.88( 238)    0   1  |    0   1  |   63.04  314 |   63.39  314 |   64.72  287  COLONIAL
+ 307  Fairleigh Dickinson     =  63.87   17  15   63.30( 362)    0   0  |    0   0  |   62.37  324 |   63.38  315 |   64.66  290  NORTHEAST
+ 308  Denver                  =  63.79   13  17   66.97( 321)    0   1  |    0   1  |   64.19  300 |   64.52  298 |   63.09  314  SUMMIT LEAGUE
+ 309  Maine                   =  63.76   11  17   69.98( 236)    0   0  |    0   1  |   64.23  299 |   64.14  302 |   63.21  312  AMERICA EAST
+ 310  Jackson State           =  63.72   14  18   68.11( 295)    0   3  |    0   6  |   63.60  310 |   63.83  305 |   63.62  304  SOUTHWESTERN
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 311  Loyola-Maryland         =  63.65   11  20   67.61( 310)    0   0  |    0   2  |   62.51  321 |   63.11  318 |   64.32  296  PATRIOT
+ 312  Bucknell                =  63.61   11  20   67.05( 320)    0   0  |    0   1  |   63.82  306 |   63.46  311 |   63.49  309  PATRIOT
+ 313  Wagner                  =  63.42   13  13   63.88( 360)    0   0  |    0   0  |   63.06  313 |   63.66  308 |   63.37  310  NORTHEAST
+ 314  Southern Indiana        =  63.19   13  16   66.34( 335)    0   0  |    0   0  |   63.95  304 |   63.35  316 |   62.60  320  OHIO VALLEY
+ 315  NC A&T                  =  63.16   10  19   69.92( 237)    0   1  |    0   3  |   63.03  315 |   63.65  309 |   62.87  317  COLONIAL
+ 316  Chicago State           =  63.06    7  20   72.11( 146)    0   2  |    0   3  |   62.97  316 |   61.68  327 |   63.62  305  INDEPENDENTS
+ 317  Kansas City(UMKC)       =  62.94   10  20   69.34( 263)    0   1  |    0   2  |   64.01  303 |   64.52  297 |   61.23  334  SUMMIT LEAGUE
+ 318  Alabama A&M             =  62.90   12  17   65.42( 347)    0   0  |    0   2  |   62.37  325 |   61.82  326 |   63.52  308  SOUTHWESTERN
+ 319  Charleston Southern     =  62.74    8  21   69.04( 272)    0   0  |    0   1  |   62.76  319 |   62.47  322 |   62.76  319  BIG SOUTH
+ 320  Sacred Heart            =  62.71   15  17   63.67( 361)    0   0  |    0   1  |   62.00  327 |   62.74  319 |   62.93  316  NORTHEAST
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 321  The Citadel             =  62.69    9  22   70.48( 208)    0   0  |    0   2  |   62.55  320 |   63.24  317 |   62.37  323  SOUTHERN
+ 322  Omaha(Neb.-Omaha)       =  62.53    8  23   70.85( 195)    0   1  |    0   3  |   62.89  318 |   62.69  320 |   62.16  324  SUMMIT LEAGUE
+ 323  Little Rock             =  62.53    8  21   66.43( 333)    0   1  |    0   2  |   62.43  323 |   61.84  325 |   62.79  318  OHIO VALLEY
+ 324  Idaho                   =  62.38    8  22   68.50( 286)    0   0  |    0   0  |   63.63  308 |   62.59  321 |   61.44  330  BIG SKY
+ 325  Elon                    =  62.04    6  24   69.38( 259)    0   1  |    0   2  |   61.66  330 |   61.28  329 |   62.48  321  COLONIAL
+ 326  Central Michigan        =  62.04    8  21   70.96( 193)    0   1  |    1   1  |   62.91  317 |   63.45  312 |   60.56  336  MAC
+ 327  NJIT(New Jersey Tech)   =  61.99    6  23   68.44( 290)    0   0  |    0   0  |   61.78  328 |   61.08  333 |   62.41  322  AMERICA EAST
+ 328  CS Northridge           =  61.67    5  25   70.30( 216)    0   0  |    0   0  |   62.46  322 |   61.22  330 |   61.37  331  BIG WEST
+ 329  Saint Francis-Pa.       =  61.66   11  18   64.49( 357)    0   0  |    0   2  |   60.99  332 |   61.18  331 |   62.10  325  NORTHEAST
+ 330  Texas A&M-Commerce      =  61.53   12  20   66.32( 336)    0   1  |    0   1  |   61.62  331 |   60.95  335 |   61.65  327  SOUTHLAND
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 331  Morgan State            =  61.40   11  16   67.20( 318)    0   2  |    0   2  |   61.77  329 |   62.37  323 |   60.55  338  MEAC
+ 332  New Orleans             =  61.35   10  20   65.02( 353)    0   1  |    0   1  |   60.04  341 |   60.82  336 |   62.06  326  SOUTHLAND
+ 333  Albany-NY               =  61.15    6  23   69.65( 248)    0   0  |    0   3  |   60.73  334 |   61.03  334 |   61.31  332  AMERICA EAST
+ 334  Monmouth-NJ             =  61.01    7  26   71.40( 169)    0   0  |    0   2  |   59.32  347 |   61.36  328 |   61.45  329  COLONIAL
+ 335  Austin Peay             =  60.97    6  22   69.47( 255)    0   2  |    0   3  |   62.06  326 |   61.98  324 |   59.61  342  ATLANTIC SUN
+ 336  Hampton                 =  60.82    7  24   69.19( 268)    0   0  |    0   0  |   59.82  343 |   59.76  344 |   61.62  328  COLONIAL
+ 337  Stonehill               =  60.76   13  17   65.78( 343)    0   1  |    0   2  |   60.21  338 |   59.86  342 |   61.31  333  NORTHEAST
+ 338  McNeese State           =  60.47   10  23   66.53( 331)    0   3  |    0   4  |   60.84  333 |   60.22  340 |   60.31  340  SOUTHLAND
+ 339  Holy Cross              =  60.41    8  22   67.39( 314)    0   1  |    0   1  |   59.86  342 |   60.46  339 |   60.55  337  PATRIOT
+ 340  Presbyterian College    =  60.33    3  27   68.73( 280)    0   0  |    0   0  |   60.63  335 |   59.11  348 |   60.61  335  BIG SOUTH
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 341  Columbia                =  60.12    5  22   70.68( 202)    0   0  |    0   2  |   59.38  346 |   60.04  341 |   60.41  339  IVY LEAGUE
+ 342  Central Connecticut St. =  60.11   10  22   64.89( 354)    0   0  |    0   1  |   60.14  339 |   59.66  345 |   60.21  341  NORTHEAST
+ 343  Central Arkansas        =  59.77    8  22   69.26( 265)    0   1  |    0   1  |   60.05  340 |   60.52  338 |   59.11  347  ATLANTIC SUN
+ 344  Evansville              =  59.70    5  27   72.52( 136)    0   0  |    0   0  |   60.22  337 |   61.12  332 |   58.41  351  MISSOURI VALLEY
+ 345  Ark.-Pine Bluff         =  59.49    6  21   67.89( 304)    0   2  |    0   3  |   60.39  336 |   59.06  349 |   59.10  348  SOUTHWESTERN
+ 346  VMI                     =  59.46    4  25   71.00( 187)    0   0  |    0   0  |   59.55  345 |   59.76  343 |   59.17  346  SOUTHERN
+ 347  Bethune-Cookman         =  59.34   10  20   65.51( 345)    0   1  |    0   3  |   58.98  349 |   59.42  347 |   59.38  344  SOUTHWESTERN
+ 348  Coppin State            =  59.32    9  23   70.22( 222)    0   1  |    0   3  |   59.76  344 |   60.59  337 |   58.19  353  MEAC
+ 349  St. Francis-NY          =  59.21   12  16   63.18( 363)    0   0  |    0   1  |   58.68  352 |   59.55  346 |   59.19  345  NORTHEAST
+ 350  Incarnate Word          =  58.83    9  19   65.19( 350)    0   1  |    0   1  |   58.92  350 |   58.47  351 |   58.87  349  SOUTHLAND
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 351  Eastern Illinois        =  58.74    7  22   65.98( 340)    0   0  |    1   2  |   58.78  351 |   58.59  350 |   58.70  350  OHIO VALLEY
+ 352  Florida A&M             =  58.30    5  22   68.38( 291)    0   2  |    0   4  |   58.35  353 |   58.17  353 |   58.25  352  SOUTHWESTERN
+ 353  IUPUI                   =  58.14    3  27   67.93( 301)    0   0  |    0   1  |   56.39  358 |   55.88  359 |   59.47  343  HORIZON
+ 354  Lindenwood              =  57.95    8  21   66.80( 325)    0   0  |    0   1  |   57.87  354 |   57.59  354 |   58.07  354  OHIO VALLEY
+ 355  Alabama State           =  57.80    7  23   67.42( 313)    0   0  |    0   2  |   58.98  348 |   58.36  352 |   56.62  358  SOUTHWESTERN
+ 356  Lamar                   =  57.37    6  22   65.21( 349)    0   1  |    0   1  |   57.12  356 |   56.56  357 |   57.75  355  SOUTHLAND
+ 357  SC State                =  57.30    4  26   70.08( 231)    0   1  |    0   2  |   57.50  355 |   56.98  356 |   57.26  356  MEAC
+ 358  Houston Christian       =  56.93    7  22   65.18( 351)    0   1  |    0   2  |   56.76  357 |   57.14  355 |   56.80  357  SOUTHLAND
+ 359  MVSU(Miss. Valley St.)  =  56.26    5  27   68.65( 282)    0   2  |    0   3  |   56.23  360 |   55.42  361 |   56.55  359  SOUTHWESTERN
+ 360  Delaware State          =  56.00    5  23   67.77( 306)    0   1  |    0   3  |   56.24  359 |   55.58  360 |   55.97  360  MEAC
+College Basketball 2022-2023    Div I games only    through games of 2023 March 9 Thursday                                                      
+                                RATING    W   L  SCHEDL(RANK) VS top 25 | VS top 50 |  PREDICTOR   | GOLDEN_MEAN  |  RECENT    
+                HOME ADVANTAGE=[  3.09]                                               [  3.13]       [  3.23]       [  2.80]
+ 361  Green Bay               =  55.55    3  29   70.57( 207)    0   0  |    0   0  |   55.55  361 |   55.93  358 |   55.24  361  HORIZON
+ 362  Hartford                =  54.33    2  23   65.91( 341)    0   0  |    0   0  |   53.96  362 |   54.47  362 |   54.33  362  INDEPENDENTS
+ 363  Long Island U.(LIU)     =  52.46    1  26   66.65( 328)    0   2  |    0   2  |   52.36  363 |   52.17  363 |   52.55  363  NORTHEAST
+    """    
+
+elif config.date == 2017:
     lineparts = ["Rank","Team","Rating","W","L","Schedule","ScheduleRank","WinsVsTop25","LossesVsTop25","WinsVsTop50","LossesVsTop50",
                  "PREDICTOR","PREDICTOR_RANK",
                  "GOLDENMEAN_SCORE","GOLDENMEAN_RANK",
