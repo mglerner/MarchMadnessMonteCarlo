@@ -73,7 +73,9 @@ elif config.date == 2023:
     # The ones to check on:
     # Pittsburgh
     # Arizona St.
-    # Texas Southern 
+    # Texas A&M Corpus Chris
+    # Texas Southern
+    # 
     Teams['midwest'] = ['Houston','Northern Kentucky','Iowa','Auburn',
                         'Miami FL','Drake','Indiana','Kent St.',
                         'Iowa St.','Pittsburgh','Xavier','Kennesaw St.',
