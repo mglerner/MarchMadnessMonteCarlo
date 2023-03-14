@@ -156,7 +156,7 @@ def simulate(ntrials, region, T, printonswap=False, printbrackets=True):
     if type(region)  in (type([]), type(())):
         teams = region[:]
     else:
-        teams = _teams.teams[region]
+        teams = _teams.Teams[region]
     b = Bracket(teams, T)
     energy = b.energy()
     ng = sum(b.games_in_rounds) # total number of games
@@ -437,8 +437,8 @@ class Stats:
                 pct[team][r] = 100*counts[team][r]/nt1
             for r in ['Championship','Win']:
                 pct[team][r] = 100*counts[team][r]/nt2
-            pct[team]['Region'] = teams.regions[team]
-            pct[team]['Rank'] = int(teams.regional_rankings[team])
+            pct[team]['Region'] = _teams.Regions[team]
+            pct[team]['Rank'] = int(_teams.Regional_rankings[team])
         def tablekey(d):
             # gets teamname, pct
             return [d[1][i] for i in reversed(allrounds)]
